@@ -1,20 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Curl_maui.MainPage">
 
-    <Grid ColumnDefinitions="Auto,*" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="0" Padding="0">
-        <Border Grid.Column="0" Stroke="#3d3d3d" StrokeThickness="1" StrokeShape="RoundRectangle 5,5,5,5" Padding="8,5" HorizontalOptions="Fill" VerticalOptions="Fill" MinimumWidthRequest="200" >
+    <Grid RowDefinitions="Auto,*" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="0" Padding="0">
+        <Border Grid.Row="0" Stroke="#3d3d3d" StrokeThickness="1" StrokeShape="RoundRectangle 5,5,5,5" Padding="8,5" HorizontalOptions="Fill" VerticalOptions="Fill" MinimumWidthRequest="200" >
             <VerticalStackLayout Padding="1,1" Spacing="5" >
-                <Editor HorizontalOptions="Fill" VerticalOptions="Fill" Placeholder="Enter your URL here:" />
-                <Editor HorizontalOptions="Fill" VerticalOptions="Fill" Placeholder="Enter your Header here:" />
-                <Button Text="Open File" HorizontalOptions="Start" WidthRequest="130"/>
+                <HorizontalStackLayout Padding="1,1" Spacing="5" >
+                    <Label Text="URL: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Enter your URL here:" Text="{Binding Url}" MinimumWidthRequest="1500" />
+                    <Button Text="Send URL request" Margin="50, 5" HorizontalOptions="End" Command="{Binding RequestUrlCmd}"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Padding="1,1" Spacing="5">
+                    <Label Text="Hearder Key 1: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Key Here:" Text="{Binding HeaderKey1}" MinimumWidthRequest="500"/>
+                    <Label Text="Hearder Value 1: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Value Here:" Text="{Binding HeaderVal1}" MinimumWidthRequest="800"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Padding="1,1" Spacing="5">
+                    <Label Text="Hearder Key 2: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Key Here:" Text="{Binding HeaderKey2}" MinimumWidthRequest="500"/>
+                    <Label Text="Hearder Value 2: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Value Here:" Text="{Binding HeaderVal2}" MinimumWidthRequest="800"/>
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Padding="1,1" Spacing="5">
+                    <Label Text="Hearder Key 3: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Key Here:" Text="{Binding HeaderKey3}" MinimumWidthRequest="500"/>
+                    <Label Text="Hearder Value 3: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Value Here:" Text="{Binding HeaderVal3}" MinimumWidthRequest="800"/>
+                </HorizontalStackLayout>
             </VerticalStackLayout>
         </Border>
-        <Border Grid.Column="1" Stroke="#3d3d3d" StrokeThickness="1" StrokeShape="RoundRectangle 5,5,5,5" Padding="8,5" HorizontalOptions="Fill" VerticalOptions="Fill" >
-            <Grid RowDefinitions="*,Auto" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="0" Padding="0" >
-                <Editor Grid.Row="0" HorizontalOptions="Fill" VerticalOptions="Fill" Placeholder="Enter your response here" />
-                <Label Grid.Row="1" Text="ImgMetaData" HorizontalOptions="Start"/>
+        <Border Grid.Row="1" Stroke="#3d3d3d" StrokeThickness="1" StrokeShape="RoundRectangle 5,5,5,5" Padding="8,5" HorizontalOptions="Fill" VerticalOptions="Fill" >
+            <Grid ColumnDefinitions="*,Auto" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="0" Padding="1" >
+                <toolkit:MediaElement Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Aspect="Center"  Source="{Binding MediaSource}" ShouldAutoPlay="True" />
+                <!--<Image Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Fill" Aspect="AspectFit" Source="{Binding ImgSource}" />-->
+                <ScrollView Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Fill" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always">
+                    <Editor HorizontalOptions="Center" VerticalOptions="Fill" Text="{Binding ResponseHeaders}" WidthRequest="800" Placeholder="Response headers show here:"/>
+                </ScrollView>
             </Grid>
 
         </Border>

@@ -12,12 +12,22 @@ namespace Curl_maui;
 public class StaticValues
 {
     [SupportedOSPlatform("windows")]
-    public static string DefaultSaveFolderPath { get { return @"C:\Heliogen\Data\Images"; } }
+    public static string DefaultSaveFolderPath { get { return @"C:\Heliogen\Data\"; } }
 
     [SupportedOSPlatform("windows")]
-    public static string DefaultSaveFilePath()
+    public static string DefaultSaveImageFilePath()
     {
         return Path.Combine(DefaultSaveFolderPath, $"Img_{DateTime.UtcNow.ToLocalTime().ToDateTimeFileString()}.png");
+    }
+    [SupportedOSPlatform("windows")]
+    public static string DefaultSaveVideoFilePath()
+    {
+        return Path.Combine(DefaultSaveFolderPath, $"Video_{DateTime.UtcNow.ToLocalTime().ToDateTimeFileString()}.mp4");
+    }
+
+    public static string CurrentSaveVideoFilePath()
+    {
+        return Path.Combine(Directory.GetCurrentDirectory(), $"Video_{DateTime.UtcNow.ToLocalTime().ToDateTimeFileString()}.mp4");
     }
 }
 
