@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Curl_maui.MainPage">
+
+    <Grid ColumnDefinitions="Auto,*" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="0" Padding="0">
+        <Border Grid.Column="0" Stroke="#3d3d3d" StrokeThickness="1" StrokeShape="RoundRectangle 5,5,5,5" Padding="8,5" HorizontalOptions="Fill" VerticalOptions="Fill" MinimumWidthRequest="200" >
+            <VerticalStackLayout Padding="1,1" Spacing="5" >
+                <Editor HorizontalOptions="Fill" VerticalOptions="Fill" Placeholder="Enter your URL here:" />
+                <Editor HorizontalOptions="Fill" VerticalOptions="Fill" Placeholder="Enter your Header here:" />
+                <Button Text="Open File" HorizontalOptions="Start" WidthRequest="130"/>
+            </VerticalStackLayout>
+        </Border>
+        <Border Grid.Column="1" Stroke="#3d3d3d" StrokeThickness="1" StrokeShape="RoundRectangle 5,5,5,5" Padding="8,5" HorizontalOptions="Fill" VerticalOptions="Fill" >
+            <Grid RowDefinitions="*,Auto" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="0" Padding="0" >
+                <Editor Grid.Row="0" HorizontalOptions="Fill" VerticalOptions="Fill" Placeholder="Enter your response here" />
+                <Label Grid.Row="1" Text="ImgMetaData" HorizontalOptions="Start"/>
+            </Grid>
+
+        </Border>
+    </Grid>
+
+</ContentPage>
