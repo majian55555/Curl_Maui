@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Net.Sockets;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 using System.Threading.Tasks.Dataflow;
 using OneOf;
 
@@ -11,23 +10,13 @@ namespace Curl_maui;
 
 public class StaticValues
 {
-    [SupportedOSPlatform("windows")]
-    public static string DefaultSaveFolderPath { get { return @"C:\Heliogen\Data\"; } }
-
-    [SupportedOSPlatform("windows")]
-    public static string DefaultSaveImageFilePath()
-    {
-        return Path.Combine(DefaultSaveFolderPath, $"Img_{DateTime.UtcNow.ToLocalTime().ToDateTimeFileString()}.png");
-    }
-    [SupportedOSPlatform("windows")]
-    public static string DefaultSaveVideoFilePath()
-    {
-        return Path.Combine(DefaultSaveFolderPath, $"Video_{DateTime.UtcNow.ToLocalTime().ToDateTimeFileString()}.mp4");
-    }
-
     public static string CurrentSaveVideoFilePath()
     {
-        return Path.Combine(Directory.GetCurrentDirectory(), $"Video_{DateTime.UtcNow.ToLocalTime().ToDateTimeFileString()}.mp4");
+        return Path.Combine(FileSystem.Current.AppDataDirectory, $"Video_{DateTime.UtcNow.ToLocalTime().ToDateTimeFileString()}.mp4");
+    }
+    public static string CurrentConfigFilePath()
+    {
+        return Path.Combine(FileSystem.Current.AppDataDirectory, "curl_maui.config");
     }
 }
 
@@ -122,7 +111,7 @@ public static class Tasks
     /// OperationCanceledException (and that only when the exception token matches the given token)
     /// </summary>
     public static async Task OnlyThrowCancelled(this Task t, CancellationToken token,
-        Action<Exception> onError = null)
+        Action<Exception>? onError = null)
     {
         try
         { await t.CAF(); }

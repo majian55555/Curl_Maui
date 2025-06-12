@@ -12,6 +12,7 @@ public partial class MainPage : ContentPage
     {
         MainPageVm vm = BindingContext as MainPageVm ??
             throw App.LogNException("MainPageVm is null");
+        vm.LoadConfig();
         return Task.CompletedTask;
     }
 

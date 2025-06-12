@@ -19,6 +19,7 @@
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
         <!-- Display name -->
         <ApplicationTitle>Curl_maui</ApplicationTitle>
