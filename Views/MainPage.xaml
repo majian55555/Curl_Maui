@@ -41,9 +41,13 @@
                 <ScrollView IsVisible="{Binding TextVis}" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Fill">
                     <Editor HorizontalOptions="Fill" VerticalOptions="Fill" Text="{Binding TextContent}"/>
                 </ScrollView>
-                <ScrollView Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Fill" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always">
-                    <Editor HorizontalOptions="Fill" VerticalOptions="Fill" Text="{Binding ResponseHeaders}" WidthRequest="800" Placeholder="Response headers show here:"/>
-                </ScrollView>
+                <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Fill" Padding="1,1" Spacing="5" WidthRequest="800">
+                    <Editor HorizontalOptions="Fill" VerticalOptions="StartAndExpand" MinimumHeightRequest="50" Text="{Binding ResponseCode}" TextColor="LightGreen" IsReadOnly="True" />
+                    <Editor HorizontalOptions="Fill" VerticalOptions="StartAndExpand" MinimumHeightRequest="100" Text="{Binding ContentHeaders}" TextColor="LightBlue" IsReadOnly="True" />
+                    <ScrollView HorizontalOptions="Fill" VerticalOptions="Fill" HorizontalScrollBarVisibility="Always" VerticalScrollBarVisibility="Always">
+                        <Editor HorizontalOptions="Fill" VerticalOptions="Fill" AutoSize="TextChanges" Text="{Binding ResponseHeaders}" TextColor="LightGoldenrodYellow" IsReadOnly="True" />
+                    </ScrollView>
+                </VerticalStackLayout>
             </Grid>
 
         </Border>

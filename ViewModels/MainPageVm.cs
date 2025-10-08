@@ -23,6 +23,8 @@ public class MainPageVm : ViewModelBase, IDisposable
     public string? HeaderVal2 { get; set; }
     public string? HeaderKey3 { get; set; }
     public string? HeaderVal3 { get; set; }
+    public string? ResponseCode { get; set; }
+    public string? ContentHeaders { get; set; }
     public string? ResponseHeaders { get; set; }
     public string? TextContent { get; set; }
     public string? RequestTimer { get; set; }
@@ -189,9 +191,12 @@ public class MainPageVm : ViewModelBase, IDisposable
         {
             var response = await httpClient.GetAsync(Url, cts.Token).CAF();
             response.EnsureSuccessStatusCode(); // Throws exception if not success (2xx)
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Response Code: {response.StatusCode}");
-            sb.AppendLine($"Content Headers: ");
+            
+            ResponseCode = $"Response Code: {response.StatusCode}";
+            RaisePropertyChanged(nameof(ResponseCode));
+
+            StringBuilder sb = new();
+            sb.AppendLine($"Content Headers: {response.Content.Headers.Count()}");
             foreach (var h in response.Content.Headers)
             {
                 sb.AppendLine($"{h.Key} : {string.Join(' ', h.Value)}");
@@ -218,17 +223,21 @@ public class MainPageVm : ViewModelBase, IDisposable
                         TextContent = await response.Content.ReadAsStringAsync(cts.Token).CAF();
                         RaisePropertyChanged(nameof(TextContent));
                     }
+                    RaisePropertyChanged(nameof(VideoVis));
+                    RaisePropertyChanged(nameof(ImageVis));
+                    RaisePropertyChanged(nameof(TextVis));
                 }
             }
-            sb.AppendLine("Response Headers:");
+            ContentHeaders = sb.ToString();
+            RaisePropertyChanged(nameof(ContentHeaders));
+
+            sb.Clear();
+            sb.AppendLine($"Response Headers: {response.Headers.Count()}");
             foreach (var header in response.Headers)
             {
-                sb.AppendLine($"{header.Key}: {string.Join(", ", header.Value)}");
+                sb.AppendLine($"{header.Key}: {string.Join(' ', header.Value)}");
             }
             ResponseHeaders = sb.ToString();
-            RaisePropertyChanged(nameof(VideoVis));
-            RaisePropertyChanged(nameof(ImageVis));
-            RaisePropertyChanged(nameof(TextVis));
             RaisePropertyChanged(nameof(ResponseHeaders));
             RaisePropertyChanged(nameof(SaveButtonEnabled));
 
