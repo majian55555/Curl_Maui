@@ -1,6 +1,10 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Storage;
+using CommunityToolkit.Maui.Views;
 using System;
+using System.Runtime.Versioning;
 using System.Text;
+using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace Curl_maui;
 
@@ -54,6 +58,7 @@ public class MainPageVm : ViewModelBase, IDisposable
     }
 
     public bool RequestButtonEnabled { get; set; } = true;
+    public bool SaveButtonEnabled { get { return _tmpFilePath is not null; } }
 
     public void LoadConfig()
     {
@@ -143,6 +148,18 @@ public class MainPageVm : ViewModelBase, IDisposable
         }
     }
 
+    public Command SaveCmd => new Command(() =>
+    {
+        if (_tmpFilePath is null || Url is null)
+        { throw new Exception("_tmpFilePath is null"); }
+        string newPath = StaticValues.GetDownloadsFolderPath();
+        string url = Regex.Replace(Url, @"http://localhost:\d+/", "");
+        url = Regex.Replace(url, @"[\\/:*?""<>|]", "_");
+        url += ".mp4";
+        newPath = Path.Combine(newPath, url);
+        File.Copy(_tmpFilePath, newPath, overwrite: true);
+    });
+
     public Command RequestUrlCmd => new Command(async () =>
     {
         RequestButtonEnabled = false;
@@ -213,6 +230,7 @@ public class MainPageVm : ViewModelBase, IDisposable
             RaisePropertyChanged(nameof(ImageVis));
             RaisePropertyChanged(nameof(TextVis));
             RaisePropertyChanged(nameof(ResponseHeaders));
+            RaisePropertyChanged(nameof(SaveButtonEnabled));
 
         }
         catch (TaskCanceledException e)

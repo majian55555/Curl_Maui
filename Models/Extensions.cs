@@ -18,6 +18,10 @@ public class StaticValues
     {
         return Path.Combine(FileSystem.Current.AppDataDirectory, "curl_maui.config");
     }
+    public static string GetDownloadsFolderPath()
+    {
+        return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),"Downloads");
+    }
 }
 
 public static class Tasks
