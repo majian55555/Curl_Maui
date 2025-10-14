@@ -186,7 +186,7 @@ public class MainPageVm : ViewModelBase, IDisposable
         {
             httpClient.DefaultRequestHeaders.Add(HeaderKey3, HeaderVal3);
         }
-        CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(20));
+        CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
         try
         {
             var response = await httpClient.GetAsync(Url, cts.Token).CAF();
