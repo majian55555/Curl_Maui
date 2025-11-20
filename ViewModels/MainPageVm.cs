@@ -1,9 +1,5 @@
-﻿using CommunityToolkit.Maui.Storage;
-using CommunityToolkit.Maui.Views;
-using System;
-using System.Runtime.Versioning;
+﻿using CommunityToolkit.Maui.Views;
 using System.Text;
-using System.Threading;
 using System.Text.RegularExpressions;
 
 namespace Curl_maui;
@@ -30,6 +26,7 @@ public class MainPageVm : ViewModelBase, IDisposable
     public string? RequestTimer { get; set; }
 
     private string? _tmpFilePath = null;
+    private string? _fileExt = null;
     private List<string> _savedFiles = new List<string>();
     private ContentType _contentType = ContentType.Image;
     private byte[]? _imgBytes = null;
@@ -60,7 +57,14 @@ public class MainPageVm : ViewModelBase, IDisposable
     }
 
     public bool RequestButtonEnabled { get; set; } = true;
-    public bool SaveButtonEnabled { get { return _tmpFilePath is not null; } }
+    public bool SaveButtonEnabled { 
+        get
+        { 
+            return _tmpFilePath is not null 
+                || _imgBytes is not null 
+                || TextContent is not null; 
+        } 
+    }
 
     public void LoadConfig()
     {
@@ -150,16 +154,27 @@ public class MainPageVm : ViewModelBase, IDisposable
         }
     }
 
-    public Command SaveCmd => new Command(() =>
+    public Command SaveCmd => new Command(async () =>
     {
-        if (_tmpFilePath is null || Url is null)
-        { throw new Exception("_tmpFilePath is null"); }
+        if (Url is null)
+        { throw new Exception("Url is null"); }
         string newPath = StaticValues.GetDownloadsFolderPath();
         string url = Regex.Replace(Url, @"http://localhost:\d+/", "");
-        url = Regex.Replace(url, @"[\\/:*?""<>|]", "_");
-        url += ".mp4";
+        url = Regex.Replace(url, @"[\\/:*?""<>|.]", "_");
+        url += _fileExt;
         newPath = Path.Combine(newPath, url);
-        File.Copy(_tmpFilePath, newPath, overwrite: true);
+        if (_tmpFilePath is not null)
+        {
+            File.Copy(_tmpFilePath, newPath, overwrite: true);
+        }
+        else if (_imgBytes is not null)
+        {
+            await File.WriteAllBytesAsync(newPath, _imgBytes).CAF();
+        }
+        else if (TextContent is not null)
+        {
+            await File.WriteAllTextAsync(newPath, TextContent).CAF();
+        }    
     });
 
     public Command RequestUrlCmd => new Command(async () =>
@@ -209,18 +224,28 @@ public class MainPageVm : ViewModelBase, IDisposable
                         _tmpFilePath = StaticValues.CurrentSaveVideoFilePath();
                         await File.WriteAllBytesAsync(_tmpFilePath, bytes, cts.Token).CAF();
                         _savedFiles.Add(_tmpFilePath);
+                        _fileExt = ".mp4";
+                        _imgBytes = null;
+                        TextContent = null;
                         RaisePropertyChanged(nameof(MediaSource));
                     }
                     else if (h.Value.First().Contains("image"))
                     {
                         _contentType = ContentType.Image;
                         _imgBytes = await response.Content.ReadAsByteArrayAsync(cts.Token).CAF();
+                        var parts = h.Value.First().Split('/');
+                        _fileExt = parts.Length > 1 ? "." + parts[1] : null;
+                        _tmpFilePath = null;
+                        TextContent = null;
                         RaisePropertyChanged(nameof(ImgSource));
                     }
                     else
                     {
                         _contentType = ContentType.Text;
                         TextContent = await response.Content.ReadAsStringAsync(cts.Token).CAF();
+                        _fileExt = ".txt";
+                        _tmpFilePath = null;
+                        _imgBytes = null;
                         RaisePropertyChanged(nameof(TextContent));
                     }
                     RaisePropertyChanged(nameof(VideoVis));
