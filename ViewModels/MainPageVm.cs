@@ -221,7 +221,7 @@ public class MainPageVm : ViewModelBase, IDisposable
                 sb.AppendLine($"{h.Key} : {string.Join(' ', h.Value)}");
                 if (h.Key == "Content-Type")
                 {
-                    if (h.Value.First() == "video/mp4")
+                    if (h.Value.First().StartsWith("video/"))
                     {
                         _contentType = ContentType.Video;
                         byte[] bytes = await response.Content.ReadAsByteArrayAsync(_request_cts.Token).CAF();
@@ -233,7 +233,7 @@ public class MainPageVm : ViewModelBase, IDisposable
                         TextContent = null;
                         RaisePropertyChanged(nameof(MediaSource));
                     }
-                    else if (h.Value.First().Contains("image"))
+                    else if (h.Value.First().StartsWith("image/"))
                     {
                         _contentType = ContentType.Image;
                         _imgBytes = await response.Content.ReadAsByteArrayAsync(_request_cts.Token).CAF();
@@ -289,6 +289,7 @@ public class MainPageVm : ViewModelBase, IDisposable
             RaisePropertyChanged(nameof(RequestButtonEnabled));
             CancelButtonEnabled = false;
             RaisePropertyChanged(nameof(CancelButtonEnabled));
+            _request_cts?.Dispose();
             _request_cts = null;
         }
     });

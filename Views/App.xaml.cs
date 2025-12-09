@@ -29,7 +29,7 @@ public partial class App : Application
     protected override Window CreateWindow(IActivationState? activationState)
     {
         var window = base.CreateWindow(activationState) ?? throw LogNException("Create window failed.");
-        window.Title = "Cell Migration Detector";
+        window.Title = "Curl MAUI - HTTP Client";
         window.Created += async (e, s) =>
         {
             Log.Info("Window on Created.");

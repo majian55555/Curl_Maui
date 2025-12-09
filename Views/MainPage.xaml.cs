@@ -19,7 +19,7 @@ public partial class MainPage : ContentPage
     public Task OnDestroy()
     {
         MainPageVm vm = BindingContext as MainPageVm ??
-            throw App.LogNException("CameraHmiViewModel is null");
+            throw App.LogNException("MainPageVm is null");
         vm.Dispose();
         return Task.CompletedTask;
     }
