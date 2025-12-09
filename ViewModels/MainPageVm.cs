@@ -57,6 +57,7 @@ public class MainPageVm : ViewModelBase, IDisposable
     }
 
     public bool RequestButtonEnabled { get; set; } = true;
+    public bool CancelButtonEnabled { get; set; } = true;
     public bool SaveButtonEnabled { 
         get
         { 
@@ -177,10 +178,13 @@ public class MainPageVm : ViewModelBase, IDisposable
         }    
     });
 
+    CancellationTokenSource? _request_cts;
     public Command RequestUrlCmd => new Command(async () =>
     {
         RequestButtonEnabled = false;
         RaisePropertyChanged(nameof(RequestButtonEnabled));
+        CancelButtonEnabled = true;
+        RaisePropertyChanged(nameof(CancelButtonEnabled));
         _ = StartRequestTimer();
         if (string.IsNullOrEmpty(Url))
         {
@@ -201,10 +205,10 @@ public class MainPageVm : ViewModelBase, IDisposable
         {
             httpClient.DefaultRequestHeaders.Add(HeaderKey3, HeaderVal3);
         }
-        CancellationTokenSource cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
+        _request_cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
         try
         {
-            var response = await httpClient.GetAsync(Url, cts.Token).CAF();
+            var response = await httpClient.GetAsync(Url, _request_cts.Token).CAF();
             response.EnsureSuccessStatusCode(); // Throws exception if not success (2xx)
             
             ResponseCode = $"Response Code: {response.StatusCode}";
@@ -220,9 +224,9 @@ public class MainPageVm : ViewModelBase, IDisposable
                     if (h.Value.First() == "video/mp4")
                     {
                         _contentType = ContentType.Video;
-                        byte[] bytes = await response.Content.ReadAsByteArrayAsync(cts.Token).CAF();
+                        byte[] bytes = await response.Content.ReadAsByteArrayAsync(_request_cts.Token).CAF();
                         _tmpFilePath = StaticValues.CurrentSaveVideoFilePath();
-                        await File.WriteAllBytesAsync(_tmpFilePath, bytes, cts.Token).CAF();
+                        await File.WriteAllBytesAsync(_tmpFilePath, bytes, _request_cts.Token).CAF();
                         _savedFiles.Add(_tmpFilePath);
                         _fileExt = ".mp4";
                         _imgBytes = null;
@@ -232,7 +236,7 @@ public class MainPageVm : ViewModelBase, IDisposable
                     else if (h.Value.First().Contains("image"))
                     {
                         _contentType = ContentType.Image;
-                        _imgBytes = await response.Content.ReadAsByteArrayAsync(cts.Token).CAF();
+                        _imgBytes = await response.Content.ReadAsByteArrayAsync(_request_cts.Token).CAF();
                         var parts = h.Value.First().Split('/');
                         _fileExt = parts.Length > 1 ? "." + parts[1] : null;
                         _tmpFilePath = null;
@@ -242,7 +246,7 @@ public class MainPageVm : ViewModelBase, IDisposable
                     else
                     {
                         _contentType = ContentType.Text;
-                        TextContent = await response.Content.ReadAsStringAsync(cts.Token).CAF();
+                        TextContent = await response.Content.ReadAsStringAsync(_request_cts.Token).CAF();
                         _fileExt = ".txt";
                         _tmpFilePath = null;
                         _imgBytes = null;
@@ -283,6 +287,17 @@ public class MainPageVm : ViewModelBase, IDisposable
         {
             RequestButtonEnabled = true;
             RaisePropertyChanged(nameof(RequestButtonEnabled));
+            CancelButtonEnabled = false;
+            RaisePropertyChanged(nameof(CancelButtonEnabled));
+            _request_cts = null;
+        }
+    });
+
+    public Command CancelUrlCmd => new Command(async () =>
+    {
+        if (_request_cts is not null)
+        {
+            await _request_cts.CancelAsync().CAF();
         }
     });
 

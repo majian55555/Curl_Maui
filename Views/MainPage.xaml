@@ -5,32 +5,33 @@
              x:Class="Curl_maui.MainPage">
 
     <Grid RowDefinitions="Auto,*" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="0" Padding="0">
-        <Border Grid.Row="0" Stroke="#3d3d3d" StrokeThickness="1" StrokeShape="RoundRectangle 5,5,5,5" Padding="8,5" HorizontalOptions="Fill" VerticalOptions="Fill" MinimumWidthRequest="200" >
+        <Border Grid.Row="0" Stroke="#3d3d3d" StrokeThickness="1" StrokeShape="RoundRectangle 5,5,5,5" Padding="8,5" HorizontalOptions="Fill" VerticalOptions="Fill" MinimumWidthRequest="100" >
             <VerticalStackLayout Padding="1,1" Spacing="5" >
                 <HorizontalStackLayout Padding="1,1" Spacing="5" >
                     <Label Text="URL: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Enter your URL here:" Text="{Binding Url}" MinimumWidthRequest="1500" />
-                    <Button Text="Send URL request" FontAttributes="Bold" FontSize="Small"  Margin="50, 5" HorizontalOptions="End" Command="{Binding RequestUrlCmd}" IsEnabled="{Binding RequestButtonEnabled}"/>
+                    <Button Text="Send URL request" FontAttributes="Bold" FontSize="Small"  Margin="5, 5" HorizontalOptions="End" Command="{Binding RequestUrlCmd}" IsEnabled="{Binding RequestButtonEnabled}"/>
+                    <Button Text="Cancel URL request" FontAttributes="Bold" FontSize="Small"  Margin="5, 5" HorizontalOptions="End" Command="{Binding CancelUrlCmd}" IsEnabled="{Binding CancelButtonEnabled}"/>
                     <Label Text="{Binding RequestTimer}" Margin="20, 0" HorizontalOptions="End" VerticalOptions="Center" FontSize="Medium"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Padding="1,1" Spacing="5">
                     <Label Text="Hearder Key 1: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Key Here:" Text="{Binding HeaderKey1}" MinimumWidthRequest="500"/>
                     <Label Text="Hearder Value 1: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Value Here:" Text="{Binding HeaderVal1}" MinimumWidthRequest="800"/>
-                    <Button Text="Save File" FontAttributes="Bold" FontSize="Small"  Margin="50, 5" HorizontalOptions="End" Command="{Binding SaveCmd}" IsEnabled="{Binding SaveButtonEnabled}"/>
+                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Value Here:" Text="{Binding HeaderVal1}" MinimumWidthRequest="795"/>
+                    <Button Text="Save File" FontAttributes="Bold" FontSize="Small" Margin="5, 5" HorizontalOptions="End" Command="{Binding SaveCmd}" IsEnabled="{Binding SaveButtonEnabled}"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Padding="1,1" Spacing="5">
                     <Label Text="Hearder Key 2: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Key Here:" Text="{Binding HeaderKey2}" MinimumWidthRequest="500"/>
                     <Label Text="Hearder Value 2: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Value Here:" Text="{Binding HeaderVal2}" MinimumWidthRequest="800"/>
+                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Value Here:" Text="{Binding HeaderVal2}" MinimumWidthRequest="795"/>
                 </HorizontalStackLayout>
                 <HorizontalStackLayout Padding="1,1" Spacing="5">
                     <Label Text="Hearder Key 3: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Key Here:" Text="{Binding HeaderKey3}" MinimumWidthRequest="500"/>
                     <Label Text="Hearder Value 3: " Margin="5" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Value Here:" Text="{Binding HeaderVal3}" MinimumWidthRequest="800"/>
+                    <Editor Margin="5" HorizontalOptions="Center" VerticalOptions="Center" Placeholder="Header Value Here:" Text="{Binding HeaderVal3}" MinimumWidthRequest="795"/>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </Border>
