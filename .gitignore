@@ -57,3 +57,5 @@ nunit-*.xml
 
 #VS code
 .vscode/
+*.csproj.user
+*.vbproj.user
