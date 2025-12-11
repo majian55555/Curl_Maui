@@ -14,9 +14,21 @@ public class StaticValues
     {
         return Path.Combine(FileSystem.Current.AppDataDirectory, $"Video_{DateTime.UtcNow.ToLocalTime().ToDateTimeFileString()}.mp4");
     }
+    public static string CurrentSaveImageFilePath(string extension = "jpg")
+    {
+        return Path.Combine(FileSystem.Current.AppDataDirectory, $"Image_{DateTime.UtcNow.ToLocalTime().ToDateTimeFileString()}.{extension}");
+    }
+    public static string CurrentSaveTextFilePath()
+    {
+        return Path.Combine(FileSystem.Current.AppDataDirectory, $"Image_{DateTime.UtcNow.ToLocalTime().ToDateTimeFileString()}.txt");
+    }
     public static string CurrentConfigFilePath()
     {
         return Path.Combine(FileSystem.Current.AppDataDirectory, "curl_maui.config");
+    }
+    public static string GetDownloadsFolderPath()
+    {
+        return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),"Downloads");
     }
 }
 

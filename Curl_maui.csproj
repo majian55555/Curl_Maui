@@ -10,6 +10,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
+        <PackageCertificateThumbprint>0A772707AB5738C24AD36EAA300042C290E4451D</PackageCertificateThumbprint>
 
         <!-- Display name -->
         <ApplicationTitle>Curl_maui</ApplicationTitle>
