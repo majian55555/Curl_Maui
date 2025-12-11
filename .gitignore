@@ -8,6 +8,7 @@
 ## Get latest from https://github.com/github/gitignore/blob/main/Dotnet.gitignore
 
 .vs/
+.DS_Store
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -23,6 +24,14 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+
+# Visual Studio user files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+*.vbproj.user
 
 # .NET Core
 project.lock.json
