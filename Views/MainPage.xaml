@@ -37,7 +37,8 @@
         </Border>
         <Border Grid.Row="1" Stroke="#3d3d3d" StrokeThickness="1" StrokeShape="RoundRectangle 5,5,5,5" Padding="8,5" HorizontalOptions="Fill" VerticalOptions="Fill" >
             <Grid ColumnDefinitions="*,Auto" HorizontalOptions="Fill" VerticalOptions="Fill" Margin="0" Padding="1" >
-                <toolkit:MediaElement IsVisible="{Binding VideoVis}" Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" Aspect="Center" Source="{Binding MediaSource}" ShouldAutoPlay="True" />
+                <toolkit:MediaElement IsVisible="{Binding VideoVis}" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Fill" Aspect="Center" Source="{Binding MediaSource}" 
+                    MinimumHeightRequest="200" MinimumWidthRequest="300" ShouldAutoPlay="True" />
                 <Image IsVisible="{Binding ImageVis}" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Fill" Aspect="AspectFit" Source="{Binding ImgSource}" />
                 <ScrollView IsVisible="{Binding TextVis}" Grid.Column="0" HorizontalOptions="Fill" VerticalOptions="Fill">
                     <Editor HorizontalOptions="Fill" VerticalOptions="Fill" Text="{Binding TextContent}"/>
