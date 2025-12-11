@@ -57,7 +57,7 @@ public class MainPageVm : ViewModelBase, IDisposable
     }
 
     public bool RequestButtonEnabled { get; set; } = true;
-    public bool CancelButtonEnabled { get; set; } = true;
+    public bool CancelButtonEnabled { get; set; } = false;
     public bool SaveButtonEnabled { 
         get
         { 
