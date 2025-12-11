@@ -25,6 +25,14 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# Visual Studio user files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+*.vbproj.user
+
 # .NET Core
 project.lock.json
 project.fragment.lock.json
@@ -57,5 +65,3 @@ nunit-*.xml
 
 #VS code
 .vscode/
-*.csproj.user
-*.vbproj.user
