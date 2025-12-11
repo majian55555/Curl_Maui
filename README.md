@@ -31,6 +31,14 @@ A cross-platform HTTP client application built with .NET MAUI that provides a gr
 
 ## Installation
 
+### Install Dotnet and .NET MAUI
+
+We need Dotnet version 9
+
+[Install .NET on macOS](https://learn.microsoft.com/en-us/dotnet/core/install/macos)
+
+[Install MAUI on macOS](https://learn.microsoft.com/en-us/dotnet/maui/get-started/installation?view=net-maui-10.0&tabs=visual-studio-code)
+
 ### Clone the Repository
 
 ```bash
