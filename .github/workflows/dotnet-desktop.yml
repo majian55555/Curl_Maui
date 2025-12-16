@@ -32,10 +32,7 @@ jobs:
           dotnet publish
           -c Release
           -f net10.0-windows10.0.19041.0
-          -p:WindowsPackageType=None
-          -p:PublishSingleFile=true
-          -p:SelfContained=false
-
+          -p:RuntimeIdentifierOverride=win10-x64
   macos:
     name: macOS (Mac Catalyst)
     runs-on: macos-latest
@@ -62,5 +59,3 @@ jobs:
           -c Release
           -f net10.0-maccatalyst
           -p:CreatePackage=false
-          -p:PublishSingleFile=true
-          -p:SelfContained=false
