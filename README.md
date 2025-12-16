@@ -74,7 +74,7 @@ dotnet build -f net10.0-windows10.0.19041.0 -c Release -p:RuntimeIdentifierOverr
 dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:RuntimeIdentifierOverride=win10-x64
 ```
 
-### Publish for Mac Catalyst
+### Publish for Mac Catalyst (macOS needs Xcode 26.2 or above installed)
 
 ```bash
 dotnet publish -f net10.0-maccatalyst -c Release -p:CreatePackage=false
