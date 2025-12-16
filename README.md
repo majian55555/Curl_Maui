@@ -2,6 +2,10 @@
 
 A cross-platform HTTP client application built with .NET MAUI that provides a graphical interface for making HTTP GET requests, similar to the command-line tool `curl`. The application allows you to send requests with custom headers and view responses in various formats (images, videos, or text).
 
+## Demo
+
+https://github.com/majian55555/Curl_Maui/demo.mp4
+
 ## Features
 
 - **HTTP GET Requests**: Send HTTP GET requests to any URL
@@ -18,12 +22,12 @@ A cross-platform HTTP client application built with .NET MAUI that provides a gr
 - **Save Responses**: Save downloaded content (images, videos, or text) to your Downloads folder
 - **Config Persistence**: Automatically saves and restores your URL and header configurations
 - **Request Cancellation**: Cancel in-progress requests if needed
-- **Cross-Platform**: Supports Windows, Android, iOS, and Mac Catalyst
+- **Cross-Platform**: Supports Windows, and Mac Catalyst right now. But should be easy to add Android, and iOS
 
 ## Requirements
 
-- .NET 9.0 SDK or later
-- Visual Studio 2022 (17.8 or later) with .NET MAUI workload, or
+- .NET 10.0 SDK or later
+- Visual Studio 2022 (17.14 or later) with .NET MAUI workload, or
 - Visual Studio Code with C# extension and .NET MAUI extension
 - Platform-specific requirements:
   - **Windows**: Windows 10 version 17763.0 or later
@@ -33,7 +37,11 @@ A cross-platform HTTP client application built with .NET MAUI that provides a gr
 
 ### Install Dotnet and .NET MAUI
 
-We need Dotnet version 9
+We need Dotnet version 10
+
+[Install .NET on Windows](https://learn.microsoft.com/en-us/dotnet/core/install/windows)
+
+[Install MAUI on Windows](https://learn.microsoft.com/en-us/dotnet/maui/get-started/installation?view=net-maui-10.0&tabs=visual-studio-code)
 
 [Install .NET on macOS](https://learn.microsoft.com/en-us/dotnet/core/install/macos)
 
@@ -57,19 +65,19 @@ dotnet restore
 ### Build for Windows
 
 ```bash
-dotnet build -f net9.0-windows10.0.19041.0 -c Release -p:RuntimeIdentifierOverride=win10-x64
+dotnet build -f net10.0-windows10.0.19041.0 -c Release -p:RuntimeIdentifierOverride=win10-x64
 ```
 
 ### Publish for Windows
 
 ```bash
-dotnet publish -f net9.0-windows10.0.19041.0 -c Release -p:RuntimeIdentifierOverride=win10-x64
+dotnet publish -f net10.0-windows10.0.19041.0 -c Release -p:RuntimeIdentifierOverride=win10-x64
 ```
 
 ### Publish for Mac Catalyst
 
 ```bash
-dotnet publish -f net9.0-maccatalyst -c Release -p:CreatePackage=false
+dotnet publish -f net10.0-maccatalyst -c Release -p:CreatePackage=false
 ```
 
 ## Usage
