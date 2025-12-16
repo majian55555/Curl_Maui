@@ -4,7 +4,7 @@ A cross-platform HTTP client application built with .NET MAUI that provides a gr
 
 ## Demo
 
-https://github.com/majian55555/Curl_Maui/demo.mp4
+https://github.com/majian55555/Curl_Maui/blob/main/Gui_Curl_Demo.mp4
 
 ## Features
 
