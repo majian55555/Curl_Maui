@@ -1,6 +1,6 @@
-# Curl_Maui
+# GUI for Curl
 
-A cross-platform HTTP client application built with .NET MAUI that provides a graphical interface for making HTTP GET requests, similar to the command-line tool `curl`. The application allows you to send requests with custom headers and view responses in various formats (images, videos, or text).
+A cross-platform HTTP client desktop application built with .NET MAUI that provides a graphical interface for making HTTP GET requests, similar to the command-line tool `curl`. The application allows you to send requests with custom headers and view responses in various formats (images, videos, or text).
 
 ## Demo
 
@@ -14,7 +14,7 @@ A cross-platform HTTP client application built with .NET MAUI that provides a gr
   - **Images**: View image responses directly in the application
   - **Videos**: Play video responses (MP4 format) with built-in media player
   - **Text**: Display text/JSON/HTML responses in an editable editor
-- **Response Information**: View detailed response information including:
+- **Response Information**: View detailed response information, including:
   - HTTP status code
   - Content headers
   - Response headers
@@ -22,7 +22,7 @@ A cross-platform HTTP client application built with .NET MAUI that provides a gr
 - **Save Responses**: Save downloaded content (images, videos, or text) to your Downloads folder
 - **Config Persistence**: Automatically saves and restores your URL and header configurations
 - **Request Cancellation**: Cancel in-progress requests if needed
-- **Cross-Platform**: Supports Windows, and Mac Catalyst right now. But should be easy to add Android, and iOS
+- **Cross-Platform**: Supports Windows and macOS right now. But it should be easy to add Android and iOS
 
 ## Requirements
 
@@ -37,7 +37,7 @@ A cross-platform HTTP client application built with .NET MAUI that provides a gr
 
 ### Install Dotnet and .NET MAUI
 
-We need Dotnet version 10
+We need .NET version 10
 
 [Install .NET on Windows](https://learn.microsoft.com/en-us/dotnet/core/install/windows)
 
@@ -141,7 +141,7 @@ Curl_Maui/
 ## Notes
 
 - Requests have a default timeout of 60 seconds
-- Video responses are temporarily saved to app data directory and cleaned up on app close
+- Video responses are temporarily saved to the app data directory and cleaned up on app close
 - Saved files are stored in your Downloads folder with sanitized filenames based on the URL
 - The application uses `ConfigureAwait(false)` throughout for better async performance
 
@@ -153,7 +153,7 @@ Copyright (c) 2025 Jian Ma
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
+in the Software without restriction, including, without limitation, the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
@@ -164,7 +164,7 @@ copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
