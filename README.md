@@ -125,7 +125,7 @@ Curl_Maui/
 
 ## Technologies Used
 
-- **.NET MAUI 9.0**: Cross-platform UI framework
+- **.NET MAUI 10.0**: Cross-platform UI framework
 - **CommunityToolkit.Maui**: Community toolkit for MAUI with MediaElement support
 - **NLog**: Logging framework
 - **OneOf**: Discriminated union library for error handling
